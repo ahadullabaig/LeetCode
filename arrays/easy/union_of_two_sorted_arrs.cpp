@@ -47,14 +47,43 @@ vector<int> union_of_arrs(vector<int> &arr1, vector<int> &arr2)
     return arr;
 }
 
+void leetcode(vector<int> &nums1, int m, vector<int> &nums2, int n)
+{
+    int l = m-1, r = n-1;
+
+    int slot = m+n-1;
+
+    while(l >= 0 && r >= 0)
+    {
+        if(nums2[r] >= nums1[l])
+        {
+            nums1[slot] = nums2[r];
+            r--;
+        }
+        else
+        {
+            nums1[slot] = nums1[l];
+            l--;
+        }
+
+        slot--;
+    }
+
+    while(r >= 0)
+    {
+        nums1[slot] = nums2[r];
+        r--; slot--;
+    }
+}
+
 int main()
 {
-    vector<int> arr1 = {1, 2, 3, 4, 5, 6};
-    vector<int> arr2 = {2, 3, 4, 5, 6, 7};
+    vector<int> arr1 = {1, 2, 3, 0, 0, 0};
+    vector<int> arr2 = {2, 5, 6};
 
-    vector<int> arr = union_of_arrs(arr1, arr2);
+    leetcode(arr1, 3, arr2, 3);
 
-    for(int x : arr) cout << x << " ";
+    for(int x : arr1) cout << x << " ";
 
     cout << endl;
 
