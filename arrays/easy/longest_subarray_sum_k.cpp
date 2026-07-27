@@ -40,11 +40,11 @@ int longest_subarray_with_negatives(vector<int> &nums, int k)
 
         if(sum == k) longest = i+1;
 
-        int prefix = sum - k;
+        int required_sum = sum - k;
 
-        if(sums.find(prefix) != sums.end())
+        if(sums.find(required_sum) != sums.end())
         {
-            longest = max(longest, i - sums[prefix]);
+            longest = max(longest, i - sums[required_sum]);
         }
 
         if(sums.find(sum) == sums.end())
