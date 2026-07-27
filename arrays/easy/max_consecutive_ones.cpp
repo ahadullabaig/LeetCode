@@ -34,5 +34,9 @@ int findMaxConsecutiveOnes(vector<int> &nums)
 
 int main()
 {
+    vector<int> arr = {1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1};
+
+    cout << findMaxConsecutiveOnes(arr) << endl;
+
     return 0;
 }
