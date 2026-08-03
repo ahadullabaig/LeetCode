@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int majorityElement(vector<int> &nums)
+{
+    int n = nums.size();
+
+    unordered_map<int, int> counts;
+
+    for(int x : nums)
+    {
+        counts[x]++;
+
+        if(counts[x] > n/2) return x;
+    }
+
+    return 0;
+}
+
+int main()
+{
+    vector<int> nums = {2, 2, 1, 1, 1, 2, 2};
+
+    cout << majorityElement(nums) << endl;
+
+    return 0;
+}
