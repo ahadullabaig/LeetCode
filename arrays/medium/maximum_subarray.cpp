@@ -4,8 +4,6 @@ using namespace std;
 
 int maxSubArray(vector<int> &nums)
 {
-    int n = nums.size();
-
     int sum = 0, max_sum = INT_MIN;
 
     for(int x : nums)
