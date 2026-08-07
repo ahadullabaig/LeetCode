@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void rotate(vector<vector<int>> &matrix)
+void my_rotate(vector<vector<int>> &matrix) // O(n*n) space complexity
 {
     int n = matrix.size();
 
@@ -25,6 +25,24 @@ void rotate(vector<vector<int>> &matrix)
     }
 }
 
+void op_rotate(vector<vector<int>> &matrix) // O(1) space complexity
+{
+    int n = matrix.size();
+
+    for(int i=0; i<n; i++)
+    {
+        for(int j = (i+1); j<n; j++)
+        {
+            swap(matrix[i][j], matrix[j][i]);
+        }
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        reverse(matrix[i].begin(), matrix[i].end());
+    }
+}
+
 int main()
 {
     vector<vector<int>> matrix = {{8, 1, 2},
@@ -40,7 +58,7 @@ int main()
         cout << endl;
     }
 
-    rotate(matrix);
+    op_rotate(matrix);
 
     cout << "\nmatrix after rotating:" << endl;
 
