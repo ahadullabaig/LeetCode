@@ -174,13 +174,52 @@ vector<int> better_spiralOrder(vector<vector<int>> &matrix)
     return spiral;
 }
 
+// use 4 pointers to represent the unvisited rectangle. O(1) space complexity.
+vector<int> op_spiralOrder(vector<vector<int>> &matrix)
+{
+    int rows = matrix.size(), cols = matrix[0].size();
+
+    vector<int> spiral;
+
+    int left = 0, right = cols-1;
+
+    int top = 0, bottom = rows-1;
+
+    while(left <= right && top <= bottom)
+    {
+        for(int j = left; j <= right; j++) spiral.push_back(matrix[top][j]);
+
+        top++;
+
+        for(int i = top; i <= bottom; i++) spiral.push_back(matrix[i][right]);
+
+        right--;
+
+        if(top <= bottom)
+        {
+            for(int j = right; j >= left; j--) spiral.push_back(matrix[bottom][j]);
+
+            bottom--;
+        }
+
+        if(left <= right)
+        {
+            for(int i = bottom; i >= top; i--) spiral.push_back(matrix[i][left]);
+
+            left++;
+        }
+    }
+
+    return spiral;
+}
+
 int main()
 {
     vector<vector<int>> matrix = {{1, 2, 3, 4},
                                   {10, 11, 12, 5},
                                   {9, 8, 7, 6}};
                       
-    vector<int> spiral = better_spiralOrder(matrix);
+    vector<int> spiral = op_spiralOrder(matrix);
 
     for(int x : spiral) cout << x << " ";
 
