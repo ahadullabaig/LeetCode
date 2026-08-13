@@ -20,11 +20,18 @@ bool better_isPowerOfTwo(int n) // floating point handling
     return abs(result - round(result)) < 1e-10;
 }
 
+bool op_isPowerOfTwo(int n) // bit manipulation technique
+{
+    if(n <= 0) return false;
+
+    return (n & (n-1)) == 0;
+}
+
 int main()
 {
     int n = 536870912;
 
-    cout << better_isPowerOfTwo(n) << endl;
+    cout << op_isPowerOfTwo(n) << endl;
 
     return 0;
 }
