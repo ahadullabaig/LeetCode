@@ -43,16 +43,15 @@ int sum_of_squares(int n)
 
 bool op_isHappy(int n) // O(1) space complexity. Floyd's Cycle Detection Algorithm.
 {
-    int slow = n;
+    int slow = n, fast = n;
 
-    int fast = sum_of_squares(n);
-
-    while(fast != 1 && fast != slow)
+    do
     {
         slow = sum_of_squares(slow);
 
         fast = sum_of_squares(sum_of_squares(fast)); // always 2 steps ahead
     }
+    while(fast != 1 && fast != slow);
 
     return fast == 1;
 }
