@@ -100,7 +100,7 @@ vector<int> xor_rep_and_missing(vector<int> &nums) // O(1) space complexity
         if(num == group1) return {group1, group2};
     }
 
-    return {group2, group1};;
+    return {group2, group1};
 }
 
 int main()
