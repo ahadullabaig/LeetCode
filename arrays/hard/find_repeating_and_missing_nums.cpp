@@ -29,11 +29,45 @@ vector<int> rep_and_missing(vector<int> &nums)
     return ans;
 }
 
+vector<int> sums_rep_and_missing(vector<int> &nums) // O(1) space complexity
+{
+    int n = nums.size();
+
+    int expectedSum1 = ((n + 1) * n) / 2;
+
+    int expectedSum2 = ((2*n + 1) * (n + 1) * n) / 6;
+
+    int actualSum1 = 0, actualSum2 = 0;
+
+    for(int x : nums)
+    {
+        actualSum1 += x;
+
+        actualSum2 += x*x;
+    }
+
+    int eq1 = actualSum1 - expectedSum1; // (A - B)
+
+    int eq2 = actualSum2 - expectedSum2; // (A - B) * (A + B)
+
+    int eq3 = eq2 / eq1; // (A + B)
+
+    int repeated = (eq3 + eq1) / 2; // A
+
+    int missing = (eq3 - eq1) / 2; // B
+
+    return {repeated, missing};
+}
+
 int main()
 {
-    vector<int> nums = {3, 5, 4, 1, 1};
+    vector<int> nums = {1, 2, 3, 6, 7, 5, 7};
 
     vector<int> ans = rep_and_missing(nums);
+
+    cout << ans[0] << " " << ans[1] << endl;
+
+    ans = sums_rep_and_missing(nums);
 
     cout << ans[0] << " " << ans[1] << endl;
 
