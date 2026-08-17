@@ -59,6 +59,50 @@ vector<int> sums_rep_and_missing(vector<int> &nums) // O(1) space complexity
     return {repeated, missing};
 }
 
+vector<int> xor_rep_and_missing(vector<int> &nums) // O(1) space complexity
+{
+    int n = nums.size();
+
+    int x = 0;
+
+    for(int i=1; i <= n; i++) x ^= i;
+
+    for(int num : nums) x ^= num;
+
+    // now x contains A ^ B
+
+    int bit = x & -x; // trick to get rightmost set bit
+
+    int group1 = 0, group2 = 0;
+
+    // split expected numbers into two groups
+    for(int i=1; i <= n; i++)
+    {
+        if(i & bit)
+            group1 ^= i;
+        else
+            group2 ^= i;
+    }
+
+    // split actual numbers into two groups
+    for(int num : nums)
+    {
+        if(num & bit)
+            group1 ^= num;
+        else
+            group2 ^= num;
+    }
+
+    // group1 and group2 are {A, B}, but we don't know which is which
+
+    for(int num : nums)
+    {
+        if(num == group1) return {group1, group2};
+    }
+
+    return {group2, group1};;
+}
+
 int main()
 {
     vector<int> nums = {1, 2, 3, 6, 7, 5, 7};
@@ -68,6 +112,10 @@ int main()
     cout << ans[0] << " " << ans[1] << endl;
 
     ans = sums_rep_and_missing(nums);
+
+    cout << ans[0] << " " << ans[1] << endl;
+
+    ans = xor_rep_and_missing(nums);
 
     cout << ans[0] << " " << ans[1] << endl;
 
