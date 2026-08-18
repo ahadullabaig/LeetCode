@@ -45,22 +45,26 @@ int op_largestInteger(vector<int> &nums, int k) // O(n)
 {
     int n = nums.size();
 
-    int largest = INT_MIN;
-
     unordered_map<int, int> counts;
 
     for(int x : nums) counts[x]++;
 
     if(k > 1 && k < n)
     {
-        if(counts[nums[0]] == 1 && counts[nums[n-1]] == 1) return max(nums[0], nums[n-1]);
+        bool left = counts[nums[0]] == 1;
+        
+        bool right = counts[nums[n-1]] == 1;
 
-        else if(counts[nums[0]] == 1) return nums[0];
+        if(left && right) return max(nums[0], nums[n-1]);
 
-        else if(counts[nums[n-1]] == 1) return nums[n-1];
+        else if(left) return nums[0];
+
+        else if(right) return nums[n-1];
 
         else return -1;
     }
+
+    int largest = INT_MIN;
 
     for(auto [num, count] : counts)
     {
