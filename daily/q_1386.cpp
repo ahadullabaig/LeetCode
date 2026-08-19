@@ -23,38 +23,19 @@ int maxNumberOfFamilies(int n, vector<vector<int>> &reservedSeats) // O(n*log(n)
             seat++;
         }
 
-        if(seats.contains(5) && seats.contains(6)) count -= 2;
+        bool left = !(seats.contains(2) || seats.contains(3) || seats.contains(4) || seats.contains(5));
 
-        else if(seats.contains(5))
-        {
-            if(!(seats.contains(6) || seats.contains(7) || seats.contains(8) || seats.contains(9))) count--;
+        bool right = !(seats.contains(6) || seats.contains(7) || seats.contains(8) || seats.contains(9));
 
-            else count -= 2;
-        }
+        bool middle = !(seats.contains(4) || seats.contains(5) || seats.contains(6) || seats.contains(7));
 
-        else if(seats.contains(6))
-        {
-            if(!(seats.contains(2) || seats.contains(3) || seats.contains(4) || seats.contains(5))) count--;
+        if(left && right) continue;
 
-            else count -= 2;
-        }
+        else if(left || right) count--;
 
-        else
-        {
-            if(!(seats.contains(2) || seats.contains(3) || seats.contains(4)) &&
-                !(seats.contains(7) || seats.contains(8) || seats.contains(9)))
-            {
-                continue;
-            }
+        else if(middle) count--;
 
-            else if(!(seats.contains(2) || seats.contains(3) || seats.contains(4))) count--;
-
-            else if(!(seats.contains(7) || seats.contains(8) || seats.contains(9))) count--;
-
-            else if(!(seats.contains(4) || seats.contains(7))) count--;
-
-            else count -= 2;
-        }
+        else count -= 2;
     }
 
     return count;
