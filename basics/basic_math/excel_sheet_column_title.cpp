@@ -6,7 +6,7 @@ string convertToTitle(int columnNumber)
 {
     if(columnNumber <= 26)
     {
-        return static_cast<char>('A' + columnNumber - 1) + string();
+        return static_cast<char>(64 + columnNumber) + string();
     }
 
     else if((columnNumber % 26) == 0)
@@ -16,7 +16,7 @@ string convertToTitle(int columnNumber)
     
     else
     {
-        return convertToTitle(columnNumber / 26) + static_cast<char>('A' + (columnNumber % 26) - 1);
+        return convertToTitle(columnNumber / 26) + static_cast<char>(64 + (columnNumber % 26));
     }
 }
 
