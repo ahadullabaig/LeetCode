@@ -13,7 +13,7 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-vector<int> nodesBetweenCriticalPoints(ListNode *head)
+vector<int> nodesBetweenCriticalPoints(ListNode *head) // O(n*log(n))
 {
     if(head == nullptr || head -> next == nullptr || head -> next -> next == nullptr) return {-1, -1};
 
@@ -72,7 +72,7 @@ vector<int> nodesBetweenCriticalPoints(ListNode *head)
     return {-1, -1};
 }
 
-vector<int> op_nodesBetweenCriticalPoints(ListNode *head)
+vector<int> op_nodesBetweenCriticalPoints(ListNode *head) // O(n)
 {
     if(head == nullptr || head -> next == nullptr || head -> next -> next == nullptr) return {-1, -1};
 
