@@ -15,7 +15,7 @@ struct ListNode
 
 vector<int> nodesBetweenCriticalPoints(ListNode *head)
 {
-    if(head -> next == nullptr || head -> next -> next == nullptr) return {-1, -1};
+    if(head == nullptr || head -> next == nullptr || head -> next -> next == nullptr) return {-1, -1};
 
     ListNode *prev = head;
 
@@ -72,6 +72,53 @@ vector<int> nodesBetweenCriticalPoints(ListNode *head)
     return {-1, -1};
 }
 
+vector<int> op_nodesBetweenCriticalPoints(ListNode *head)
+{
+    if(head == nullptr || head -> next == nullptr || head -> next -> next == nullptr) return {-1, -1};
+
+    ListNode *prev = head;
+
+    ListNode *temp = head -> next;
+
+    int position = 2;
+
+    int firstCritical = -1, lastCritical = -1;
+
+    int minDistance = INT_MAX;
+
+    while(temp -> next != nullptr)
+    {
+        bool isCritical = ((temp -> val < prev -> val) && (temp -> val < temp -> next -> val)) ||
+                          ((temp -> val > prev -> val) && (temp -> val > temp -> next -> val));
+
+        if(isCritical)
+        {
+            if(firstCritical == -1)
+            {
+                firstCritical = position;
+            }
+            else
+            {
+                minDistance = min(minDistance, position - lastCritical);
+            }
+
+            lastCritical = position;
+        }
+
+        prev = temp;
+
+        temp = temp -> next;
+        
+        position++;
+    }
+
+    if(firstCritical == -1 || firstCritical == lastCritical) return {-1, -1};
+
+    int maxDistance = lastCritical - firstCritical;
+
+    return {minDistance, maxDistance};
+}
+
 int main()
 {
     ListNode *head = new ListNode(5);
@@ -84,6 +131,13 @@ int main()
     head -> next -> next -> next -> next -> next -> next = new ListNode(2);
 
     vector<int> result = nodesBetweenCriticalPoints(head);
+
+    cout << "Minimum distance: " << result[0] << endl;
+    cout << "Maximum distance: " << result[1] << endl;
+
+    cout << endl;
+
+    result = op_nodesBetweenCriticalPoints(head);
 
     cout << "Minimum distance: " << result[0] << endl;
     cout << "Maximum distance: " << result[1] << endl;
