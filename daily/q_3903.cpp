@@ -46,7 +46,7 @@ int firstStableIndex(vector<int> &nums, int k)
     return -1;
 }
 
-int better_firstStableIndex(vector<int> &nums, int k)
+int op_firstStableIndex(vector<int> &nums, int k)
 {
     int n = nums.size();
 
@@ -87,7 +87,7 @@ int main()
 
     cout << firstStableIndex(nums, k) << endl;
 
-    cout << better_firstStableIndex(nums, k) << endl;
+    cout << op_firstStableIndex(nums, k) << endl;
 
     return 0;
 }
