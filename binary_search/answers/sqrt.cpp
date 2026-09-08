@@ -10,7 +10,7 @@ int sqrt_binary_search(int n)
 
     while(left <= right)
     {
-        int mid = (left + right) / 2;
+        int mid = left + (right - left) / 2;
 
         long long prod = 1LL * mid * mid;
 
