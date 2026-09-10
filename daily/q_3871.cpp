@@ -30,7 +30,7 @@ long long countCommas(long long n)
 
 int main()
 {
-    long long n = 999999;
+    long long n = 999919999;
 
     cout << countCommas(n) << endl;
 
