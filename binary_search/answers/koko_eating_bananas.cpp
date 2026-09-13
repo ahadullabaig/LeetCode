@@ -27,7 +27,7 @@ int minEatingSpeed(vector<int> &piles, int h)
                 hours -= (x/mid) + 1;
             }
 
-            if(hours > h) break;
+            if(hours < 0) break;
         }
 
         if(hours >= 0)
